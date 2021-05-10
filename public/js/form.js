@@ -1,7 +1,7 @@
 const submitFormBtn = document.querySelector(".submit_form");
 const result = document.querySelector(".list-group");
 const registForm = document.querySelector("#reg_form");
-console.log(registForm);
+
 // Fetch data from the server api
 const fetchPeople = (async () => {
   try {
@@ -25,10 +25,11 @@ const fetchPeople = (async () => {
 const postFormData = async (ev) => {
   ev.preventDefault();
   const fromdata = new FormData(registForm);
+  console.log(fromdata);
   try {
     const { data } = await axios.post("/api/people", fromdata);
   } catch (err) {
-    console.log("ERrro");
+    console.log("error");
   }
 };
 
