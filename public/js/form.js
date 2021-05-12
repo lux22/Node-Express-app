@@ -1,53 +1,65 @@
-const submitFormBtn = document.querySelector(".submit_form");
-const result = document.querySelector(".list-group");
-const registForm = document.querySelector("#reg_form");
-const api_error = document.querySelector(".api_error");
-const invalid_field = document.querySelectorAll(".invalid-feedback");
+import insertItemTemplate from "./template/htmlTemplate.js";
+import { validationError, alertError } from "./template/errorTemplate.js";
+import { result, registForm, api_error, update, state } from "./constants.js";
 
-// console.log(newmap);
+// fetch all the users from the server
 const fetchPeople = (async () => {
   try {
     const { data } = await axios.get("/api/people");
     const person = data.users
-      .map((user) => {
-        return `<li class="list-group-item d-flex justify-content-between lh-sm">
-          <div>
-            <h6 class="my-0">${user.fname} ${user.lname}</h6>
-            <small class="text-muted">${user.address}</small>
-          </div>
-        </li>`;
+      .map((user, key) => {
+        return insertItemTemplate(user, key + 1);
       })
       .join("");
+    // console.log(person);
     result.innerHTML = person;
   } catch (err) {
     console.log("Api error: cannot fetch the  data");
   }
 })();
 
+// post form data to the server
 const postFormData = async (ev) => {
   ev.preventDefault();
-  const fromdata = new FormData(registForm);
+  const key = document.getElementsByClassName("list-group-item").length + 1;
   try {
+    const fromdata = new FormData(registForm);
     const { data } = await axios.post("/api/people", fromdata);
-    const newPerson = `
-    <li class="list-group-item d-flex justify-content-between lh-sm">
-          <div>
-            <h6 class="my-0">${data.data.fname} ${data.data.lname}</h6>
-            <small class="text-muted">${data.data.address}</small>
-          </div>
-        </li>
-    `;
-    result.innerHTML += newPerson;
+
+    const newPerson = insertItemTemplate(data.data, key);
+    registForm.reset();
+    result.innerHTML = newPerson;
+    document
+      .querySelectorAll("[data-error]")
+      .forEach((item) => item.classList.add("invalid-feedback"));
   } catch (err) {
-    let error_msg = err.response.data.msg;
-    Object.keys(error_msg).forEach((key) => {
-      document
-        .querySelectorAll("[data-error =" + key + "]")[0]
-        .classList.remove("invalid-feedback");
-      document.querySelectorAll("[data-error =" + key + "]")[0].textContent =
-        error_msg[key];
-    });
+    validationError(err.response.data.msg);
   }
 };
 
+// get specific user details from the server
+const editForm = async (e) => {
+  const id = e.target.getAttribute("key");
+  state.id = id;
+  update.disabled = false;
+  if (e.target.classList.contains("list-group-item")) {
+    try {
+      registForm.reset();
+      const { data } = await axios.get(`/api/people/postman/${id}`);
+      Object.keys(data.data).forEach((key) => {
+        if (key != "id") {
+          document
+            .getElementsByName(key)[0]
+            .setAttribute("value", data.data[key]);
+        }
+      });
+    } catch (err) {
+      api_error.innerHTML = alertError(err.response.data.msg);
+    }
+  }
+};
+
+document.addEventListener("click", editForm);
+document.addEventListener("click", editForm);
+// update.addEventListener("click", updateForm);
 registForm.addEventListener("submit", postFormData);
