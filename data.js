@@ -37,19 +37,23 @@ const people = [
     id: 1,
     fname: "john",
     lname: "kiran",
+    uname: "john Kiran",
     address: "abc",
     email: "ax@gmail.com",
     address: "ernakulam",
     country: "India",
+    state: "kerala",
   },
   {
     id: 2,
     fname: "Josepht",
     lname: "Mathew",
+    uname: "joseph mathew",
     address: "abc",
     email: "ax@gmail.com",
     address: "ernakulam",
     country: "India",
+    state: "kerala",
   },
 ];
 module.exports = { products, people };

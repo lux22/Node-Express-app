@@ -172,12 +172,16 @@
                   Please provide a valid state.
               </div>
             </div>
-
             <hr class="my-4" />
 
-            <button class="w-100 btn btn-primary btn-lg" type="submit">
-              Register
-            </button>
+            <div class="col-md-4 ">
+                <button class="btn btn-primary btn-lg" type="submit" name="Register">
+                  Register
+                </button>
+                <button class=" btn btn-primary btn-lg" type="submit" name="update" disabled>
+                  update
+                </button>
+            </div>
           </form>
           <div class="api_error"></div>
         </div>
@@ -185,6 +189,6 @@
     </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="js/form.js"></script>
+    <script type="module" src="js/form.js"></script>
   </body>
 </html>
