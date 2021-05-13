@@ -9,9 +9,9 @@ const formData = multer(); //for parsing formdata
 // parsing multipart/formdata
 app.use(formData.array());
 
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.urlencoded({ extended: false }));
 
-app.use(express.json());
+// app.use(express.json());
 
 app.use(express.static("public"));
 

@@ -154,8 +154,9 @@
                 required=""
                 name="country"
               >
-                <option value="">Choose...</option>
-                <option>United States</option>
+                <option value="Choose...">Choose...</option>
+                <option value="United States">United States</option>
+                <option value="India">India</option>
               </select>
               <div class="invalid-feedback" data-error="country">
                 Please select a valid country.
@@ -165,8 +166,9 @@
             <div class="col-md-4">
               <label for="state" class="form-label">State</label>
               <select class="form-select" id="state" required="" name="state">
-                <option value="">Choose...</option>
-                <option>California</option>
+                <option value="Choose...">Choose...</option>
+                <option value="California">California</option>
+                <option value="Kerala">Kerala</option>
               </select>
               <div class="invalid-feedback" data-error="state">
                   Please provide a valid state.
@@ -175,15 +177,15 @@
             <hr class="my-4" />
 
             <div class="col-md-4 ">
-                <button class="btn btn-primary btn-lg" type="submit" name="Register">
+                <button class="btn btn-primary btn-lg" type="submit" name="register">
                   Register
                 </button>
-                <button class=" btn btn-primary btn-lg" type="submit" name="update" disabled>
+                <button class=" btn btn-primary btn-lg" type="submit" name="update" disabled=true>
                   update
                 </button>
             </div>
           </form>
-          <div class="api_error"></div>
+          <div class="alert_msg"></div>
         </div>
       </div>
     </div>
