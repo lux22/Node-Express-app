@@ -42,7 +42,7 @@ const people = [
     email: "ax@gmail.com",
     address: "ernakulam",
     country: "India",
-    state: "kerala",
+    state: "Kerala",
   },
   {
     id: 2,
@@ -53,7 +53,7 @@ const people = [
     email: "ax@gmail.com",
     address: "ernakulam",
     country: "India",
-    state: "kerala",
+    state: "Kerala",
   },
 ];
 module.exports = { products, people };

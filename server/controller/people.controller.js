@@ -37,14 +37,14 @@ const getSpecificData = (req, res) => {
 const updateUserList = (req, res) => {
   const { id } = req.params;
   const data = req.body;
-  console.log(data);
-  const personAvailable = people.find((people) => people.id === Number(id));
-  if (!personAvailable)
+  const updatePerson = people.filter((people) => {
+    if (people.id == Number(id)) return Object.assign(people, data);
+  });
+  if (!updatePerson)
     res
       .status(404)
-      .json({ success: false, msg: "no matching person with id was found" });
-
-  res.status(200).json({ success: true, data: personAvailable });
+      .json({ success: false, msg: `No Such User with id - ${id}` });
+  res.status(200).json({ success: true, msg: `User updated successfully` });
 };
 
 const formLogin = (req, res) => {

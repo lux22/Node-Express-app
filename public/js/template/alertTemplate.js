@@ -15,4 +15,11 @@ const alertError = (msg) => {
   return template;
 };
 
-export { validationError, alertError };
+const alertSuccess = (msg) => {
+  const template = `<div class="alert alert-success" role="alert">
+    ${msg}
+</div>`;
+  return template;
+};
+
+export { validationError, alertError, alertSuccess };
